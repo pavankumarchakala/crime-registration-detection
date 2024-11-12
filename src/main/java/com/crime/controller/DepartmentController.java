@@ -14,7 +14,6 @@ import com.crime.dto.DepartmentDTO;
 import com.crime.dto.SuccessResponse;
 import com.crime.service.IDepartmentService;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,7 +31,6 @@ public class DepartmentController {
 	@ApiResponses({
 			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "201", description = "Department created successfully") })
 	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Hidden
 	public ResponseEntity<SuccessResponse> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		return departmentService.addDepartment(departmentDTO);
 	}
