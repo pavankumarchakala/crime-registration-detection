@@ -10,14 +10,9 @@ import com.crime.dto.SuccessResponse;
 import com.crime.dto.UploadedMediaResponse;
 import com.crime.enums.EntityName;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
 public interface IMediaFilesUploadService {
 
-	ResponseEntity<SuccessResponse> addMediaFiles(@Valid @NotNull @NotEmpty MultipartFile[] files, EntityName entity,
-			long entityId);
+	ResponseEntity<SuccessResponse> addMediaFiles(MultipartFile[] files, EntityName entity, long entityId);
 
 	ResponseEntity<Map<String, List<UploadedMediaResponse>>> getMediaFileLinks(EntityName entityName, long userId);
 
@@ -27,7 +22,6 @@ public interface IMediaFilesUploadService {
 
 	ResponseEntity<SuccessResponse> updateMediaThumbnail(long id);
 
-	ResponseEntity<SuccessResponse> addMediaThumbnail(@Valid @NotNull @NotEmpty MultipartFile file, EntityName valueOf,
-			long entityId);
+	ResponseEntity<SuccessResponse> addMediaThumbnail(MultipartFile file, EntityName valueOf, long entityId);
 
 }

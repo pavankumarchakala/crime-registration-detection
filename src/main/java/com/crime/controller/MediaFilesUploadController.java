@@ -23,9 +23,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -39,8 +36,7 @@ public class MediaFilesUploadController {
 	@ApiResponses({
 			@ApiResponse(content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE), responseCode = "201", description = "Media added successfully") })
 	@PostMapping(value = "/upload/{entity}/{entityId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SuccessResponse> addMediafilesForUser(
-			@RequestPart("files") @Valid @NotNull @NotEmpty MultipartFile[] files,
+	public ResponseEntity<SuccessResponse> addMediafilesForUser(@RequestPart("files") MultipartFile[] files,
 			@PathVariable("entity") EntityName entityName, @PathVariable("entityId") long entityId) {
 		return mediaFilesUploadService.addMediaFiles(files, entityName, entityId);
 	}
@@ -58,8 +54,7 @@ public class MediaFilesUploadController {
 	@ApiResponses({
 			@ApiResponse(content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE), responseCode = "201", description = "Media added successfully") })
 	@PutMapping(value = "/addthumbnail/{entity}/{entityId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SuccessResponse> addMediaThumbnail(
-			@RequestPart("thumbnail") @Valid @NotNull @NotEmpty MultipartFile file,
+	public ResponseEntity<SuccessResponse> addMediaThumbnail(@RequestPart("thumbnail") MultipartFile file,
 			@PathVariable("entity") EntityName entityName, @PathVariable("entityId") long entityId) {
 		return mediaFilesUploadService.addMediaThumbnail(file, entityName, entityId);
 	}

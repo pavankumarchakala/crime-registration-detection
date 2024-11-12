@@ -19,9 +19,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -35,8 +32,8 @@ public class UserController {
 	@ApiResponses({
 			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "201", description = "User Registration is successful !!!") })
 	@PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<StationUserDTO> addUser(@Valid @NotNull @NotEmpty @RequestBody StationUserDTO userDTO,
-			@RequestPart("files") @Valid @NotNull @NotEmpty MultipartFile[] files) {
+	public ResponseEntity<StationUserDTO> addUser(@RequestBody StationUserDTO userDTO,
+			@RequestPart(value = "files", required = false) MultipartFile[] files) {
 		return userService.addUser(userDTO, files);
 	}
 

@@ -6,18 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.crime.dao.users.IUserRepository;
+import com.crime.dao.crimes.IUserRepository;
 import com.crime.dto.StationUserDTO;
 import com.crime.dto.SuccessResponse;
-import com.crime.entity.users.StationUser;
+import com.crime.entity.crimes.StationUser;
 import com.crime.enums.EntityName;
 import com.crime.exceptions.ApplicationException;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,13 +32,13 @@ public class UserService implements IUserService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<StationUserDTO> addUser(@Valid @NotNull @NotEmpty StationUserDTO userDTO,
-			@Valid @NotNull @NotEmpty MultipartFile[] files) {
+	public ResponseEntity<StationUserDTO> addUser(StationUserDTO userDTO, MultipartFile[] files) {
 		StationUser user = modelMapper.map(userDTO, StationUser.class);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		StationUser savedUser = userRepository.save(user);
 
-		mediaFilesUploadService.addMediaFiles(files, EntityName.DEPARTMENT_USER, savedUser.getId());
+		if (!ObjectUtils.isEmpty(files))
+			mediaFilesUploadService.addMediaFiles(files, EntityName.DEPARTMENT_USER, savedUser.getId());
 
 		userDTO.setId(savedUser.getId());
 		userDTO.setCreatedDate(savedUser.getCreatedDate());

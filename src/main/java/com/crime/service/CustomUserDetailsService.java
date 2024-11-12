@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.crime.dao.users.IUserRepository;
-import com.crime.entity.users.StationUser;
+import com.crime.dao.crimes.IUserRepository;
+import com.crime.entity.crimes.StationUser;
 import com.crime.exceptions.ApplicationException;
 import com.crime.security.CustomUserDetails;
 

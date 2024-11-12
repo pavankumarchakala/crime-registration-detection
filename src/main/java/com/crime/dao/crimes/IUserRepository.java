@@ -1,11 +1,11 @@
-package com.crime.dao.users;
+package com.crime.dao.crimes;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.crime.entity.users.StationUser;
+import com.crime.entity.crimes.StationUser;
 
 @Repository
 public interface IUserRepository extends JpaRepository<StationUser, Long> {

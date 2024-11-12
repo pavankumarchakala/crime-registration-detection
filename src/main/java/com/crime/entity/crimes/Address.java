@@ -1,4 +1,4 @@
-package com.crime.entity.users;
+package com.crime.entity.crimes;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;

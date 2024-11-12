@@ -1,11 +1,9 @@
-package com.crime.entity.users;
+package com.crime.entity.crimes;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.crime.entity.BaseEntity;
-import com.crime.entity.crimes.Department;
-import com.crime.entity.crimes.Station;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,21 +22,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @Builder
 @Entity
-@Table(name = "tb_station_user")
+@Table(name = "tb_complaint_user")
 @DynamicInsert
 @DynamicUpdate
-public class StationUser extends BaseEntity {
+public class ComplaintUser extends BaseEntity {
 
-	private static final long serialVersionUID = 4469460740975033853L;
-
-	@Column(name = "user_name")
-	public String userName;
-
-	@Column(name = "password")
-	public String password;
-
-	@Column(name = "badge_id")
-	public String badgeId;
+	private static final long serialVersionUID = -5604484083824681425L;
 
 	@Column(name = "first_name")
 	public String firstName;
@@ -55,13 +44,4 @@ public class StationUser extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	public Address address;
-
-	@ManyToOne
-	@JoinColumn(name = "department_id")
-	public Department department;
-
-	@ManyToOne
-	@JoinColumn(name = "station_id")
-	public Station station;
-
 }

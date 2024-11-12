@@ -4,7 +4,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.crime.entity.BaseEntity;
-import com.crime.entity.users.Address;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

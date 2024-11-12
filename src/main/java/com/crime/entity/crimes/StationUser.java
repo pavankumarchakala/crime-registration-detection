@@ -1,4 +1,4 @@
-package com.crime.entity.users;
+package com.crime.entity.crimes;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,12 +22,21 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @Builder
 @Entity
-@Table(name = "tb_complaint_user")
+@Table(name = "tb_station_user")
 @DynamicInsert
 @DynamicUpdate
-public class ComplaintUser extends BaseEntity {
+public class StationUser extends BaseEntity {
 
-	private static final long serialVersionUID = -5604484083824681425L;
+	private static final long serialVersionUID = 4469460740975033853L;
+
+	@Column(name = "user_name", unique = true)
+	public String userName;
+
+	@Column(name = "password")
+	public String password;
+
+	@Column(name = "badge_id")
+	public String badgeId;
 
 	@Column(name = "first_name")
 	public String firstName;
@@ -44,4 +53,13 @@ public class ComplaintUser extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	public Address address;
+
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	public Department department;
+
+	@ManyToOne
+	@JoinColumn(name = "station_id")
+	public Station station;
+
 }

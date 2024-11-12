@@ -4,9 +4,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.crime.entity.BaseEntity;
-import com.crime.entity.users.Address;
-import com.crime.entity.users.ComplaintUser;
-import com.crime.entity.users.StationUser;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

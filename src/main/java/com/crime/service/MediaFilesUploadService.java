@@ -33,9 +33,6 @@ import com.crime.exceptions.ApplicationException;
 import com.crime.util.MediaUploadUtils;
 import com.crime.util.RandomUtils;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -46,8 +43,8 @@ public class MediaFilesUploadService implements IMediaFilesUploadService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<SuccessResponse> addMediaFiles(@Valid @NotNull @NotEmpty MultipartFile[] files,
-			EntityName entity, long entityId) throws ApplicationException {
+	public ResponseEntity<SuccessResponse> addMediaFiles(MultipartFile[] files, EntityName entity, long entityId)
+			throws ApplicationException {
 		String dirPath = MediaUploadUtils.constructDirectoryPath(entity.getDislayValue(), entityId);
 		Arrays.asList(files).stream().forEach(file -> {
 
@@ -62,8 +59,8 @@ public class MediaFilesUploadService implements IMediaFilesUploadService {
 				HttpStatus.CREATED);
 	}
 
-	private void addMediaFile(@Valid @NotNull @NotEmpty MultipartFile file, String dirPath, EntityName entity,
-			long entityId, boolean isThumbnail) throws IOException {
+	private void addMediaFile(MultipartFile file, String dirPath, EntityName entity, long entityId, boolean isThumbnail)
+			throws IOException {
 		String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
 		String fileName = String.format("%s.%s", RandomUtils.getRandomString(), fileExtension);
 		String location = new StringBuilder(dirPath).append(File.separator).append(fileName).toString();
@@ -170,8 +167,7 @@ public class MediaFilesUploadService implements IMediaFilesUploadService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<SuccessResponse> addMediaThumbnail(@Valid @NotNull @NotEmpty MultipartFile file,
-			EntityName entity, long entityId) {
+	public ResponseEntity<SuccessResponse> addMediaThumbnail(MultipartFile file, EntityName entity, long entityId) {
 
 		try {
 			deselectThumbnailSelection(entityId, 0);
